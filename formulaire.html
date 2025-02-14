@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Film Database</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Ajouter un Film</h1>
+    <div class="form-container">
+        <form id="add-film-form">
+            <input type="text" id="nom" placeholder="Nom" required>
+            <input type="text" id="realisateur" placeholder="Réalisateur" required>
+            <input type="text" id="compagnie" placeholder="Compagnie" required>
+            <input type="text" id="dateDeSortie" placeholder="Année de Sortie" pattern="\d{4}" title="Veuillez entrer une année valide (ex: 2025)" required>
+            <input type="number" step="0.1" id="note" placeholder="Note" required>
+            <input type="number" step="0.1" id="notePublic" placeholder="Note Public" required>
+            <textarea id="description" placeholder="Description" required></textarea>
+            <input type="text" id="lienImage" placeholder="Lien Image" required>
+            <input type="text" id="origine" placeholder="Origine" required>
+            <button type="submit">Ajouter Film</button>
+        </form>
+        <button id="back-button">Retour</button>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="formulaire.js"></script>
+</body>
+</html>

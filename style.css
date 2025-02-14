@@ -1,0 +1,77 @@
+h1 {
+    text-align: center; /* Centrer le titre principal */
+}
+
+.card img {
+    width: 100%;
+    border-radius: 10px;
+}
+
+.card h2 {
+    margin: 10px 0;
+    text-align: center; /* Centrer le titre des cartes */
+}
+
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center; /* Centrer les cartes dans le conteneur */
+    padding: 0 20px; /* Ajouter un padding pour éviter que les cartes touchent les bords */
+}
+
+.card {
+    border: 5px solid grey;
+    border-radius: 8px;
+    padding: 16px;
+    width: 200px;
+    transition: background-color 0.3s, border-color 0.3s, border-width 0.3s;
+}
+
+.card:hover {
+    background-color: lightblue;
+    border-color: #007BFF;
+}
+
+.card img {
+    max-width: 100%;
+    border-radius: 8px;
+}
+
+/* Classe pour les films avec une note >= classicThreshold */
+.card.high-rating {
+    border-color: grey;
+}
+
+.card.high-rating:hover {
+    background-color: lightyellow; /* Changez la couleur de fond au survol */
+    border-color: #FFD700; /* Changez la couleur du contour au survol */
+}
+
+/* Styles pour les navets */
+.navet-card {
+    border: 5px solid red;
+    border-radius: 8px;
+    padding: 16px;
+    width: 200px;
+    transition: background-color 0.3s, border-color 0.3s, border-width 0.3s;
+    text-align: center; /* Centrer le contenu des navets */
+}
+
+.navet-card img {
+    display: block;
+    margin: 0 auto; /* Centrer l'image */
+    max-width: 100%; /* Limiter la largeur maximale de l'image */
+    height: auto; /* Conserver les proportions de l'image */
+}
+
+.navet-card:hover {
+    background-color: pink;
+    border-color: darkred;
+}
+
+/* Centrer le bouton et le menu déroulant */
+#button-container {
+    text-align: center;
+    margin-bottom: 20px; /* Ajouter un espace en dessous du bouton */
+}
