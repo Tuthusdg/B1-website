@@ -51,7 +51,7 @@ $(document).ready(function() {
                     let instance = document.importNode($('#movie-template')[0].content, true);
 
                     // Vérifier si la note du film est supérieure à 4
-                    if (movie.note > 4) {
+                    if (movie.note > 4 || movie.notePublic > 4) {
                         $(instance).find('.movie-card').addClass('classic');  // Ajouter la classe 'classic' si la note est > 4
                     }
 
