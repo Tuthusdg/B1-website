@@ -23,7 +23,7 @@ button {
     width: 300px;
     margin: 10px;
     padding: 10px;
-    border: 1px solid #ccc;
+    border: 10px solid grey;
     border-radius: 10px;
     background: #f9f9f9;
 }
@@ -34,6 +34,16 @@ button {
 }
 
 .high-rating {
-    border: 2px solid gold;
+    border: 10px solid grey;
     background: #fff7d1;
+}
+
+.movie-card:hover {
+    border-color: yellow;
+    background-color: #ffffe0; /* jaune pâle */
+}
+
+.navet-card:hover {
+    border-color: blue;
+    background-color: #e0f7ff; /* bleu pâle */
 }
