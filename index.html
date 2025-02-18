@@ -19,6 +19,7 @@
             <option value="classics">Classiques</option>
             <option value="navets">Navets</option>
         </select>
+
         <label for="origin-select">Provenance :</label>
         <select id="origin-select">
             <option value="all">Toutes les provenances</option>
@@ -26,10 +27,16 @@
             <option value="Angleterre">Angleterre</option>
             <option value="Belgique">Belgique</option>
             <option value="Pays-Bas">Pays-Bas</option>
-            <!-- Ajoutez d'autres options de provenance ici -->
         </select>
+
+        <label for="note-min">Note Min :</label>
+        <input type="number" id="note-min" step="0.1" min="0" max="5">
+
+        <label for="note-max">Note Max :</label>
+        <input type="number" id="note-max" step="0.1" min="0" max="5">
+
         <button id="import-button">Importer les films</button>
-        <button id="add-button">ajouter un film</button>
+        <button id="add-button">Ajouter un film</button>
     </div>
     
     <!-- Conteneur où les films seront affichés -->
