@@ -1,8 +1,8 @@
-$(document).ready(function () {
+$(document).ready(function() {
     const apiUrl = 'http://localhost:2506/films';
 
     // 🔥 Gestionnaire d'événement pour supprimer un film
-    $('#movies-list').on('click', '.delete-button', function () {
+    $('#movies-list').on('click', '.delete-button', function() {
         const movieCard = $(this).closest('.movie-card');
         const movieId = movieCard.attr('data-id');
 
@@ -14,18 +14,18 @@ $(document).ready(function () {
         $.ajax({
             url: `${apiUrl}/${movieId}`,
             type: 'DELETE',
-            success: function () {
+            success: function() {
                 alert('Film supprimé avec succès !');
                 movieCard.remove();
             },
-            error: function (xhr, status, error) {
+            error: function(xhr, status, error) {
                 console.error("Erreur suppression :", error);
             }
         });
     });
 
     // 🔥 Importer les films avec filtres
-    $('#import-button').click(function () {
+    $('#import-button').click(function() {
         const filter = $('#filter-select').val();
         const originFilter = $('#origin-select').val();
         const noteMin = $('#note-min').val();
@@ -43,11 +43,11 @@ $(document).ready(function () {
             url: apiUrl + queryString,
             type: 'GET',
             dataType: 'json',
-            success: function (moviesData) {
+            success: function(moviesData) {
                 const container = $('#movies-list');
                 container.empty();
 
-                $.each(moviesData, function (i, movie) {
+                $.each(moviesData, function(i, movie) {
                     let instance = document.importNode($('#movie-template')[0].content, true);
 
                     // Vérifier si la note du film ou de l'utilisateur est supérieure à 4
@@ -55,12 +55,12 @@ $(document).ready(function () {
                         $(instance).find('.movie-card').addClass('classic');  // Ajouter la classe 'classic' si la note est > 4
                     }
 
-                    else if ((parseFloat(movie.note) < 4) || (parseFloat(movie.notePublic) < 4) ||
-                        (parseFloat(movie.note) >= 3) || (parseFloat(movie.notePublic) >= 3)) {
+                     if ((parseFloat(movie.note) < 4) || (parseFloat(movie.notePublic) < 4) || 
+                    (parseFloat(movie.note) >=3) || (parseFloat(movie.notePublic) >= 3)) {
                         $(instance).find('.movie-card').addClass('normal');  // Ajouter la classe 'classic' si la note est > 4
                     }
 
-                    else {
+                    if ((parseFloat(movie.note) < 3) || (parseFloat(movie.notePublic) < 3)) {
                         $(instance).find('.movie-card').addClass('bad');  // Ajouter la classe 'classic' si la note est > 4
                     }
 
@@ -77,14 +77,14 @@ $(document).ready(function () {
                     container.append(instance);
                 });
             },
-            error: function (xhr, status, error) {
+            error: function(xhr, status, error) {
                 console.error("Erreur récupération :", error);
             }
         });
     });
 
     // 🔄 Redirection vers formulaire.html
-    $('#add-button').click(function () {
+    $('#add-button').click(function() {
         window.location.href = 'formulaire.html';
     });
 });
