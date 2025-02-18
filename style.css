@@ -1,10 +1,11 @@
 body {
     font-family: Arial, sans-serif;
-    text-align: center;
+    text-align: center; /* Centrer le titre principal */
 }
 
 #button-container {
-    margin-bottom: 20px;
+    text-align: center; /* Centrer le bouton et le menu déroulant */
+    margin-bottom: 20px; /* Ajouter un espace en dessous du bouton */
 }
 
 button {
@@ -16,34 +17,57 @@ button {
 .container {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
+    gap: 20px; /* Ajouter un espace entre les cartes */
+    justify-content: center; /* Centrer les cartes dans le conteneur */
+    padding: 0 20px; /* Ajouter un padding pour éviter que les cartes touchent les bords */
 }
 
-.movie-card, .navet-card {
-    width: 300px;
-    margin: 10px;
-    padding: 10px;
-    border: 10px solid grey;
-    border-radius: 10px;
-    background: #f9f9f9;
+.card, .movie-card, .navet-card {
+    border: 5px solid grey;
+    border-radius: 8px;
+    padding: 16px;
+    width: 200px;
+    transition: background-color 0.3s, border-color 0.3s, border-width 0.3s;
+    text-align: center; /* Centrer le contenu des cartes */
 }
 
-.movie-card img, .navet-card img {
-    width: 100%;
-    border-radius: 10px;
+.card img, .movie-card img, .navet-card img {
+    max-width: 100%;
+    border-radius: 8px;
+    display: block;
+    margin: 0 auto; /* Centrer l'image */
+    height: auto; /* Conserver les proportions de l'image */
+}
+
+.card h2, .movie-card h2, .navet-card h2 {
+    margin: 10px 0;
+    text-align: center; /* Centrer le titre des cartes */
+}
+
+.card:hover, .movie-card:hover {
+    background-color: lightblue;
+    border-color: #007BFF;
+}
+
+.card.high-rating, .movie-card.high-rating {
+    border-color: grey;
+}
+
+.card.high-rating:hover, .movie-card.high-rating:hover {
+    background-color: lightyellow; /* Changez la couleur de fond au survol */
+    border-color: #FFD700; /* Changez la couleur du contour au survol */
+}
+
+.navet-card {
+    border: 5px solid red;
+}
+
+.navet-card:hover {
+    background-color: pink;
+    border-color: darkred;
 }
 
 .high-rating {
     border: 10px solid grey;
     background: #fff7d1;
-}
-
-.movie-card:hover {
-    border-color: yellow;
-    background-color: #ffffe0; /* jaune pâle */
-}
-
-.navet-card:hover {
-    border-color: blue;
-    background-color: #e0f7ff; /* bleu pâle */
 }
