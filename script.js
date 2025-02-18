@@ -55,12 +55,12 @@ $(document).ready(function() {
                         $(instance).find('.movie-card').addClass('classic');  // Ajouter la classe 'classic' si la note est > 4
                     }
 
-                    if ((parseFloat(movie.note) < 4) || (parseFloat(movie.notePublic) < 4) || 
+                    else if ((parseFloat(movie.note) < 4) || (parseFloat(movie.notePublic) < 4) || 
                     (parseFloat(movie.note) >3) || (parseFloat(movie.notePublic) >3)) {
                         $(instance).find('.movie-card').addClass('normal');  // Ajouter la classe 'classic' si la note est > 4
                     }
 
-                    if ((parseFloat(movie.note) < 3) || (parseFloat(movie.notePublic) < 3)) {
+                    else if ((parseFloat(movie.note) < 3) || (parseFloat(movie.notePublic) < 3)) {
                         $(instance).find('.movie-card').addClass('bad');  // Ajouter la classe 'classic' si la note est > 4
                     }
 
