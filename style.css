@@ -38,8 +38,8 @@ button {
     background: #fff7d1;
 }
 
-/* Style pour les films classiques */
-.card.classic:hover, .movie-card.classic:hover {
+
+.movie-card.classic:hover {
     background-color: yellow;  /* Change la couleur de fond en jaune */
     border-color: #FFD700;  /* Change la bordure en doré */
     transform: scale(1.05);  /* Ajouter un effet d'agrandissement */
