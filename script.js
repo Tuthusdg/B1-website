@@ -49,6 +49,12 @@ $(document).ready(function() {
 
                 $.each(moviesData, function(i, movie) {
                     let instance = document.importNode($('#movie-template')[0].content, true);
+
+                    // Vérifier si la note du film est supérieure à 4
+                    if (movie.note > 4) {
+                        $(instance).find('.movie-card').addClass('classic');  // Ajouter la classe 'classic' si la note est > 4
+                    }
+
                     $(instance).find('.nom').text(movie.nom);
                     $(instance).find('.realisateur').text(movie.realisateur);
                     $(instance).find('.compagnie').text(movie.compagnie);
