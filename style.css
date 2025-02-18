@@ -44,3 +44,16 @@ button {
     border-color: #FFD700;  /* Change la bordure en doré */
     transform: scale(1.05);  /* Ajouter un effet d'agrandissement */
 }
+
+.movie-card.normal:hover {
+    background-color: blue;  /* Change la couleur de fond en jaune */
+    border-color: #1c69f8;  /* Change la bordure en doré */
+    transform: scale(1.05);  /* Ajouter un effet d'agrandissement */
+}
+
+.movie-card.bad:hover {
+    background-color: red;  /* Change la couleur de fond en jaune */
+    border-color: #f8231c;  /* Change la bordure en doré */
+    transform: scale(1.05);  /* Ajouter un effet d'agrandissement */
+}
+
