@@ -64,6 +64,7 @@ $(document).ready(function() {
                     }
 
                     // Remplir la carte avec les données du film
+                    const lie_img = movie.lienImage;
                     movieCard.attr('data-id', movie.id);
                     movieCard.find('.nom').text(movie.nom);
                     movieCard.find('.realisateur').text(movie.realisateur);
@@ -72,6 +73,7 @@ $(document).ready(function() {
                     movieCard.find('.note').text(movie.note ?? 'N/A');
                     movieCard.find('.notePublic').text(movie.notePublic ?? 'N/A');
                     movieCard.find('.description').text(movie.description);
+                    movieCard.find('.origine').text(movie.origine);
                     movieCard.find('.lienImage').attr('src', 'http://localhost:2506/' + movie.lienImage);
 
                     // 🔹 Ajouter un bouton Modifier pour chaque carte
@@ -114,7 +116,7 @@ $(document).ready(function() {
             <input type="number" step="0.1" class="edit-note" value="${currentValues.note}">
             <input type="number" step="0.1" class="edit-notePublic" value="${currentValues.notePublic}">
             <textarea class="edit-description">${currentValues.description}</textarea>
-            <input type="text" class="edit-lienImage" value="${lienImage}">
+            <input type="text" class="edit-lienImage" value="${lien_img}">
             <input type="text" class="edit-origine" value="${currentValues.origine}">
             <button class="save-button">Enregistrer</button>
             <button class="cancel-button">Annuler</button>
