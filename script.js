@@ -49,33 +49,39 @@ $(document).ready(function() {
 
                 $.each(moviesData, function(i, movie) {
                     let instance = document.importNode($('#movie-template')[0].content, true);
+                    let movieCard = $(instance).find('.movie-card');
 
-                    // Ajout des classes de style
-                    if (parseFloat(movie.note) > 4 || parseFloat(movie.notePublic) > 4) {
-                        $(instance).find('.movie-card').addClass('classic');
-                    } else if (parseFloat(movie.note) >= 3 && parseFloat(movie.note) <= 4) {
-                        $(instance).find('.movie-card').addClass('normal');
+                    // Ajouter des classes en fonction des notes
+                    const note = parseFloat(movie.note);
+                    const notePublic = parseFloat(movie.notePublic);
+
+                    if (note > 4 || notePublic > 4) {
+                        movieCard.addClass('classic');
+                    } else if ((note <= 4 && note >= 3) || (notePublic <= 4 && notePublic >= 3)) {
+                        movieCard.addClass('normal');
                     } else {
-                        $(instance).find('.movie-card').addClass('bad');
+                        movieCard.addClass('bad');
                     }
 
-                    $(instance).find('.nom').text(movie.nom);
-                    $(instance).find('.realisateur').text(movie.realisateur);
-                    $(instance).find('.compagnie').text(movie.compagnie);
-                    $(instance).find('.dateDeSortie').text(movie.dateDeSortie || 'N/A');
-                    $(instance).find('.note').text(movie.note ?? 'N/A');
-                    $(instance).find('.notePublic').text(movie.notePublic ?? 'N/A');
-                    $(instance).find('.description').text(movie.description);
-                    $(instance).find('.lienImage').attr('src', 'http://localhost:2506/' + movie.lienImage);
-                    $(instance).find('.movie-card').attr('data-id', movie.id);
+                    // Remplir la carte avec les données du film
+                    movieCard.attr('data-id', movie.id);
+                    movieCard.find('.nom').text(movie.nom);
+                    movieCard.find('.realisateur').text(movie.realisateur);
+                    movieCard.find('.compagnie').text(movie.compagnie);
+                    movieCard.find('.dateDeSortie').text(movie.dateDeSortie || 'N/A');
+                    movieCard.find('.note').text(movie.note ?? 'N/A');
+                    movieCard.find('.notePublic').text(movie.notePublic ?? 'N/A');
+                    movieCard.find('.description').text(movie.description);
+                    movieCard.find('.lienImage').attr('src', 'http://localhost:2506/' + movie.lienImage);
 
-                    // Ajout du bouton Modifier
+                    // 🔹 Ajouter un bouton Modifier pour chaque carte
                     let editButton = $('<button class="edit-button">Modifier</button>');
                     editButton.click(function() {
-                        editMovie(movie, movieCard);
+                        editMovie(movieCard);
                     });
 
-                    $(instance).find('.movie-card').append(editButton);
+                    movieCard.append(editButton); // Ajouter le bouton Modifier
+
                     container.append(instance);
                 });
             },
@@ -85,18 +91,33 @@ $(document).ready(function() {
         });
     });
 
-    function editMovie(movie, movieCard) {
-        // Remplacement de la carte par un formulaire d'édition
+    // 🔄 Fonction pour éditer un film
+    function editMovie(movieCard) {
+        const movieId = movieCard.attr('data-id');
+
+        const currentValues = {
+            nom: movieCard.find('.nom').text(),
+            realisateur: movieCard.find('.realisateur').text(),
+            compagnie: movieCard.find('.compagnie').text(),
+            dateDeSortie: movieCard.find('.dateDeSortie').text(),
+            note: movieCard.find('.note').text(),
+            notePublic: movieCard.find('.notePublic').text(),
+            description: movieCard.find('.description').text(),
+            lienImage: movieCard.find('.lienImage').attr('src'),
+            origine: movieCard.find('.origine').text()
+        };
+
+        // Remplacer la carte par un formulaire d'édition
         movieCard.html(`
-            <input type="text" class="edit-nom" value="${movie.nom}">
-            <input type="text" class="edit-realisateur" value="${movie.realisateur}">
-            <input type="text" class="edit-compagnie" value="${movie.compagnie}">
-            <input type="text" class="edit-dateDeSortie" value="${movie.dateDeSortie}">
-            <input type="number" step="0.1" class="edit-note" value="${movie.note}">
-            <input type="number" step="0.1" class="edit-notePublic" value="${movie.notePublic}">
-            <textarea class="edit-description">${movie.description}</textarea>
-            <img class="edit-lienImage" src="${movie.lienImage}" alt="Image du film">
-            <input type="text" class="edit-origine" value="${movie.origine}">
+            <input type="text" class="edit-nom" value="${currentValues.nom}">
+            <input type="text" class="edit-realisateur" value="${currentValues.realisateur}">
+            <input type="text" class="edit-compagnie" value="${currentValues.compagnie}">
+            <input type="text" class="edit-dateDeSortie" value="${currentValues.dateDeSortie}">
+            <input type="number" step="0.1" class="edit-note" value="${currentValues.note}">
+            <input type="number" step="0.1" class="edit-notePublic" value="${currentValues.notePublic}">
+            <textarea class="edit-description">${currentValues.description}</textarea>
+            <input type="text" class="edit-lienImage" value="${movie.lienImage}">
+            <input type="text" class="edit-origine" value="${currentValues.origine}">
             <button class="save-button">Enregistrer</button>
             <button class="cancel-button">Annuler</button>
         `);
@@ -116,12 +137,12 @@ $(document).ready(function() {
                 note: parseFloat($('.edit-note').val()),
                 notePublic: parseFloat($('.edit-notePublic').val()),
                 description: $('.edit-description').val(),
-                lienImage: movie.lienImage,  // ❌ L'image ne peut pas être modifiée
+                lienImage: $('.edit-lienImage').val(),
                 origine: $('.edit-origine').val()
             };
 
             $.ajax({
-                url: `${apiUrl}/${movie.id}`,
+                url: `${apiUrl}/${movieId}`,
                 type: 'PUT',
                 contentType: 'application/json',
                 data: JSON.stringify(updatedMovie),
@@ -136,7 +157,7 @@ $(document).ready(function() {
         });
     }
 
-    // 🔄 Redirection vers formulaire.html
+    // 🔄 Redirection vers le formulaire d'ajout de film
     $('#add-button').click(function() {
         window.location.href = 'formulaire.html';
     });
