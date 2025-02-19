@@ -77,7 +77,7 @@ $(document).ready(function() {
                     // 🔹 Ajouter un bouton Modifier pour chaque carte
                     let editButton = $('<button class="edit-button">Modifier</button>');
                     editButton.click(function() {
-                        editMovie(movieCard);
+                        editMovie(movieCard, movie); // Passez l'objet movie à la fonction
                     });
 
                     movieCard.append(editButton); // Ajouter le bouton Modifier
@@ -92,9 +92,7 @@ $(document).ready(function() {
     });
 
     // 🔄 Fonction pour éditer un film
-    function editMovie(movieCard) {
-        const movieId = movieCard.attr('data-id');
-
+    function editMovie(movieCard, movie) {
         const currentValues = {
             nom: movieCard.find('.nom').text(),
             realisateur: movieCard.find('.realisateur').text(),
@@ -116,7 +114,7 @@ $(document).ready(function() {
             <input type="number" step="0.1" class="edit-note" value="${currentValues.note}">
             <input type="number" step="0.1" class="edit-notePublic" value="${currentValues.notePublic}">
             <textarea class="edit-description">${currentValues.description}</textarea>
-            <input type="text" class="edit-lienImage" value="${movie.lienImage}">
+            <input type="text" class="edit-lienImage" value="${currentValues.lienImage}">
             <input type="text" class="edit-origine" value="${currentValues.origine}">
             <button class="save-button">Enregistrer</button>
             <button class="cancel-button">Annuler</button>
@@ -124,7 +122,7 @@ $(document).ready(function() {
 
         // Bouton Annuler
         $('.cancel-button').click(function() {
-            location.reload();
+            location.reload(); // Recharge la page pour annuler les modifications
         });
 
         // Bouton Enregistrer
@@ -142,13 +140,13 @@ $(document).ready(function() {
             };
 
             $.ajax({
-                url: `${apiUrl}/${movieId}`,
+                url: `${apiUrl}/${movie.id}`, // Utilisation de l'id pour la mise à jour
                 type: 'PUT',
                 contentType: 'application/json',
                 data: JSON.stringify(updatedMovie),
                 success: function() {
                     alert('Film modifié avec succès !');
-                    location.reload();
+                    location.reload();  // Recharge la page après la modification
                 },
                 error: function(xhr, status, error) {
                     console.error("Erreur modification :", error);
