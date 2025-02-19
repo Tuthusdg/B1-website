@@ -47,6 +47,8 @@ $(document).ready(function() {
                 const container = $('#movies-list');
                 container.empty();
 
+                let lien_img; // Déclarez lien_img ici
+
                 $.each(moviesData, function(i, movie) {
                     let instance = document.importNode($('#movie-template')[0].content, true);
                     let movieCard = $(instance).find('.movie-card');
@@ -64,7 +66,7 @@ $(document).ready(function() {
                     }
 
                     // Remplir la carte avec les données du film
-                    const lie_img = movie.lienImage;
+                    lien_img = movie.lienImage; // Initialisez lien_img ici
                     movieCard.attr('data-id', movie.id);
                     movieCard.find('.nom').text(movie.nom);
                     movieCard.find('.realisateur').text(movie.realisateur);
@@ -79,7 +81,7 @@ $(document).ready(function() {
                     // 🔹 Ajouter un bouton Modifier pour chaque carte
                     let editButton = $('<button class="edit-button">Modifier</button>');
                     editButton.click(function() {
-                        editMovie(movieCard, movie); // Passez l'objet movie à la fonction
+                        editMovie(movieCard, movie, lien_img); // Passez l'objet movie et lien_img à la fonction
                     });
 
                     movieCard.append(editButton); // Ajouter le bouton Modifier
@@ -94,7 +96,7 @@ $(document).ready(function() {
     });
 
     // 🔄 Fonction pour éditer un film
-    function editMovie(movieCard, movie) {
+    function editMovie(movieCard, movie, lien_img) {
         const currentValues = {
             nom: movieCard.find('.nom').text(),
             realisateur: movieCard.find('.realisateur').text(),
@@ -106,7 +108,7 @@ $(document).ready(function() {
             lienImage: movieCard.find('.lienImage').attr('src'),
             origine: movieCard.find('.origine').text()
         };
-
+    
         // Remplacer la carte par un formulaire d'édition
         movieCard.html(`
             <input type="text" class="edit-nom" value="${currentValues.nom}">
@@ -116,17 +118,17 @@ $(document).ready(function() {
             <input type="number" step="0.1" class="edit-note" value="${currentValues.note}">
             <input type="number" step="0.1" class="edit-notePublic" value="${currentValues.notePublic}">
             <textarea class="edit-description">${currentValues.description}</textarea>
-            <input type="text" class="edit-lienImage" value="${lien_img}">
+            <input type="text" class="edit-lienImage" value="${lien_img}"> <!-- Utilisez lien_img ici -->
             <input type="text" class="edit-origine" value="${currentValues.origine}">
             <button class="save-button">Enregistrer</button>
             <button class="cancel-button">Annuler</button>
         `);
-
+    
         // Bouton Annuler
         $('.cancel-button').click(function() {
             location.reload(); // Recharge la page pour annuler les modifications
         });
-
+    
         // Bouton Enregistrer
         $('.save-button').click(function() {
             const updatedMovie = {
@@ -137,10 +139,10 @@ $(document).ready(function() {
                 note: parseFloat($('.edit-note').val()),
                 notePublic: parseFloat($('.edit-notePublic').val()),
                 description: $('.edit-description').val(),
-                lienImage: $('.edit-lienImage').val(),
+                lienImage: $('.edit-lienImage').val(),  // Utilisation du champ édité pour lienImage
                 origine: $('.edit-origine').val()
             };
-
+    
             $.ajax({
                 url: `${apiUrl}/${movie.id}`, // Utilisation de l'id pour la mise à jour
                 type: 'PUT',
