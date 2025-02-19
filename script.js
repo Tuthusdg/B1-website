@@ -57,12 +57,16 @@ $(document).ready(function() {
                     const note = parseFloat(movie.note);
                     const notePublic = parseFloat(movie.notePublic);
 
-                    if (note > 4 || notePublic > 4) {
-                        movieCard.addClass('classic');
-                    } else if ((note <= 4 && note >= 3) || (notePublic <= 4 && notePublic >= 3)) {
-                        movieCard.addClass('normal');
-                    } else {
-                        movieCard.addClass('bad');
+                    if ((parseFloat(movie.note) > 4) || (parseFloat(movie.notePublic) > 4)) {
+                        $(instance).find('.movie-card').addClass('classic');  // Ajouter la classe 'classic' si la note est > 4
+                    }
+                    // Vérifier si la note est entre 3 et 4
+                    else if ((parseFloat(movie.note) >= 3) || (parseFloat(movie.notePublic) >= 3)) {
+                        $(instance).find('.movie-card').addClass('normal');  // Ajouter la classe 'normal' si la note est entre 3 et 4
+                    }
+                    // Si la note est inférieure à 3
+                    else {
+                        $(instance).find('.movie-card').addClass('bad');  // Ajouter la classe 'bad' si la note est <= 3
                     }
 
                     // Remplir la carte avec les données du film
