@@ -114,7 +114,7 @@ $(document).ready(function() {
             <input type="number" step="0.1" class="edit-note" value="${currentValues.note}">
             <input type="number" step="0.1" class="edit-notePublic" value="${currentValues.notePublic}">
             <textarea class="edit-description">${currentValues.description}</textarea>
-            <input type="text" class="edit-lienImage" value="${currentValues.lienImage}">
+            <input type="text" class="edit-lienImage" value="${lienImage}">
             <input type="text" class="edit-origine" value="${currentValues.origine}">
             <button class="save-button">Enregistrer</button>
             <button class="cancel-button">Annuler</button>
