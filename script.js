@@ -95,7 +95,7 @@ $(document).ready(function() {
             <input type="number" step="0.1" class="edit-note" value="${movie.note}">
             <input type="number" step="0.1" class="edit-notePublic" value="${movie.notePublic}">
             <textarea class="edit-description">${movie.description}</textarea>
-            <img class="edit-lienImage" src="http://localhost:2506/${movie.lienImage}" alt="Image du film">
+            <img class="edit-lienImage" src="${movie.lienImage}" alt="Image du film">
             <input type="text" class="edit-origine" value="${movie.origine}">
             <button class="save-button">Enregistrer</button>
             <button class="cancel-button">Annuler</button>
